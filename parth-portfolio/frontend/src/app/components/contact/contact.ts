@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LucideAngularModule, Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-angular';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -56,7 +57,7 @@ export class Contact {
     this.isSubmitting = true;
     this.submitError = '';
 
-    this.http.post('http://localhost:5000/api/contact', this.formData)
+    this.http.post(`${environment.apiUrl}/api/contact`, this.formData)
       .subscribe({
         next: () => {
           this.isSubmitting = false;
