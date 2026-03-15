@@ -1,0 +1,62 @@
+<section id="portfolio" class="portfolio-section section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h4 class="section-tag">Visual Gallery</h4>
+      <h2 class="section-title">Renders & <span class="text-gradient">Animations</span></h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div *ngFor="let item of galleryItems; let i = index" class="gallery-item"
+        [class.wide]="item.type === 'video' && item.videoType !== 'shorts'">
+
+        <!-- Video Item -->
+        <div *ngIf="item.type === 'video'" class="gallery-card glass video-card">
+          <div class="video-wrapper" [class.shorts]="item.videoType === 'shorts'">
+            <iframe [src]="item.embedUrl" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-info">
+            <h3>{{ item.title }}</h3>
+            <span class="item-category">{{ item.category }}</span>
+          </div>
+        </div>
+
+        <!-- Image Item -->
+        <div *ngIf="item.type === 'image'" class="gallery-card glass image-card">
+          <div class="gallery-placeholder">
+            <img [src]="item.src" [alt]="item.title" class="gallery-img">
+            <div class="gallery-overlay">
+              <div class="item-info">
+                <h3>{{ item.title }}</h3>
+                <span class="item-category">{{ item.category }}</span>
+              </div>
+              <button class="expand-btn" (click)="openLightbox(item)">
+                <lucide-icon [name]="MaximizeIcon" size="18"></lucide-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" *ngIf="selectedItem" (click)="closeLightbox()">
+    <button class="lightbox-close" (click)="closeLightbox()">
+      <lucide-icon [name]="CloseIcon" size="32"></lucide-icon>
+    </button>
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <img *ngIf="selectedItem.type === 'image'" [src]="selectedItem.src" [alt]="selectedItem.title">
+      <iframe *ngIf="selectedItem.type === 'video'" [src]="selectedItem.embedUrl" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+        class="lightbox-video">
+      </iframe>
+      <div class="lightbox-caption">
+        <h3>{{ selectedItem.title }}</h3>
+        <p>{{ selectedItem.category }}</p>
+      </div>
+    </div>
+  </div>
+</section>
