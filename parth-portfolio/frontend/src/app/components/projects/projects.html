@@ -1,0 +1,47 @@
+<section id="projects" class="projects-section section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h4 class="section-tag">Featured Works</h4>
+      <h2 class="section-title">Creative <span class="text-gradient">Showcase</span></h2>
+    </div>
+
+    <div class="projects-grid">
+      <div *ngFor="let project of projectsArray" class="project-card glass">
+        <div class="project-image-wrapper">
+          <div class="image-placeholder">
+            <img [src]="project.images[0].src" [alt]="project.title" class="project-img">
+            <div class="project-background-overlay"></div>
+            <lucide-icon [name]="EyeIcon" size="40" class="icon-eye"></lucide-icon>
+            <div class="project-overlay">
+              <div class="overlay-content">
+                <a [href]="project.githubUrl" target="_blank" class="overlay-btn" aria-label="View Project">
+                  <lucide-icon [name]="ExternalLinkIcon" size="22"></lucide-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="category-pill">{{ project.category }}</div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-content-header">
+            <h3>{{ project.title }}</h3>
+            <p class="project-description">{{ project.description }}</p>
+          </div>
+
+          <div class="project-footer">
+            <div class="tools-list">
+              <span *ngFor="let tool of project.tools" class="tool-tag">{{ tool }}</span>
+            </div>
+            <div class="project-links">
+              <a [href]="project.githubUrl" target="_blank" class="link-icon" aria-label="View Github Repository">
+                <lucide-icon [name]="GithubIcon" size="20"></lucide-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
